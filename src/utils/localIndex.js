@@ -20,8 +20,9 @@ const addFavoritesData = (coffee) => {
     storeData.push(coffee);
     const dataStore = JSON.stringify(storeData);
     localStorage.setItem("favorites", dataStore);
+    toast.success('Successfully added!');
   }
 };
 // remove data from local storage
 
-export { addFavoritesData };
+export { addFavoritesData , getFavorites};
