@@ -6,7 +6,7 @@ const Card = ({ coffee }) => {
   const { name, image, category, origin, type, id, rating, popularity } =
     coffee || {};
   return (
-    <div>
+    <div className="relative flex">
       <Link
         to={`/coffee/${id}`}
         className="transition  hover:scale-105 shadow-xl rounded-xl overflow-hidden"

@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { useLoaderData, useParams } from "react-router-dom";
+import { useLoaderData, useNavigate, useParams } from "react-router-dom";
 import Card from "./Card";
 
 const CategoryCard = () => {
   const [coffees, setCoffees] = useState([]);
   const { category } = useParams();
   const data = useLoaderData();
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (category) {
@@ -13,6 +14,8 @@ const CategoryCard = () => {
         (coffee) => coffee.category === category
       );
       setCoffees(filterByCategory);
+    } else {
+      setCoffees(data.slice(0, 6));
     }
   }, [category, data]);
 
@@ -24,6 +27,8 @@ const CategoryCard = () => {
           <Card key={coffee.id} coffee={coffee}></Card>
         ))}
       </div>
+
+      <button onClick={() => navigate("/coffees")} className="btn btn-warning">View all</button>
     </>
   );
 };
