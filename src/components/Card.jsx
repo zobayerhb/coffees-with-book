@@ -1,8 +1,9 @@
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { FaTrashAlt } from "react-icons/fa";
 
-const Card = ({ coffee }) => {
-  console.log(coffee);
+const Card = ({ coffee, handleRemove }) => {
+  const { pathname } = useLocation();
   const { name, image, category, origin, type, id, rating, popularity } =
     coffee || {};
   return (
@@ -23,12 +24,21 @@ const Card = ({ coffee }) => {
           <p>Popular: {popularity}</p>
         </div>
       </Link>
+      {pathname === "/dashboard" && (
+        <div
+          onClick={() => handleRemove(id)}
+          className="absolute p-3 rounded-full bg-warning cursor-pointer -top-5 -right-5"
+        >
+          <FaTrashAlt />
+        </div>
+      )}
     </div>
   );
 };
 
 Card.propTypes = {
   coffee: PropTypes.object,
+  handleRemove: PropTypes.func,
 };
 
 export default Card;
